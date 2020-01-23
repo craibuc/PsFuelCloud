@@ -1,4 +1,4 @@
-# PsGeotab
+# PsFuelCloud
 PowerShell module that wraps the FuelCloud API.
 
 ## Installation
