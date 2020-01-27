@@ -12,7 +12,7 @@
 RootModule = 'PsFuelCloud.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.1'
+ModuleVersion = '0.2.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -69,7 +69,7 @@ Description = 'PowerShell module that wraps the Geotab API.'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @('Get-Driver', 'Get-Product', 'Get-Tank', 'Get-Timezone', 'Get-Vehicle')
+FunctionsToExport = @('Get-Driver', 'Get-Product', 'Get-Site', 'Get-Tank', 'Get-Timezone', 'Get-Transaction', 'Get-Vehicle')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
