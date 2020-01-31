@@ -26,6 +26,8 @@ Include transactions that are assocated with this VehicleId.
 .NOTES
 The `start_date` and `end_date` fields are values at UTC.
 
+    2020-01-27 - CB - adding loop
+
 .LINK
 https://developer.fuelcloud.com/?version=latest#e52c2e16-51da-401c-93d5-da53fb230f25
 
@@ -73,7 +75,8 @@ function Get-Transaction {
 
     $Headers = @{Authorization = $AccessToken}
     
-    do {
+    do 
+    {
 
         # GET
         $Content = ( Invoke-WebRequest -Uri $uri -Method Get -ContentType "application/x-www-form-urlencoded" -Headers $Headers ).Content | ConvertFrom-Json
