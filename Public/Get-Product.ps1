@@ -1,7 +1,7 @@
 <#
-
+.NOTES
+    2020-01-27 - CB - adding loop
 #>
-
 function Get-Product {
 
     [CmdletBinding()]
@@ -21,14 +21,23 @@ function Get-Product {
 	Write-Debug "Uri: $Uri"
 
     $Headers = @{Authorization = $AccessToken}
-    
-    # GET
-    $Content = ( Invoke-WebRequest -Uri $uri -Method Get -ContentType "application/x-www-form-urlencoded" -Headers $Headers ).Content | ConvertFrom-Json
 
-	# returns PsCustomObject representation of object
-	if ( $Content.data ) { $Content.data }
+    do 
+    {
 
-    # otherwise raise an exception
-    elseif ($Content.error) { Write-Error -Message $Content.error.message }
+        # GET
+        $Content = ( Invoke-WebRequest -Uri $uri -Method Get -ContentType "application/x-www-form-urlencoded" -Headers $Headers ).Content | ConvertFrom-Json
+
+        # get Uri for the next set of records
+        $Uri = $Content.meta.next
+        Write-Debug "Next Uri: $Uri"
     
+        # returns PsCustomObject representation of object
+        if ( $Content.data ) { $Content.data }
+
+        # otherwise raise an exception
+        elseif ($Content.error) { Write-Error -Message $Content.error.message }
+ 
+    } while ( $null -ne $Uri )
+ 
 }
