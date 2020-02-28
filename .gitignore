@@ -1,5 +1,8 @@
 # user settings
 .DS_Store
+
 Credential.*
+Settings.*
+
 AccessToken.*
 RefreshToken.*
