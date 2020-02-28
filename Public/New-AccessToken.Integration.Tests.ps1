@@ -1,5 +1,8 @@
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
+
+$Parent = Split-Path -Parent $here
+
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Integration.Tests\.', '.'
 . "$here\$sut"
 
 Describe "New-AccessToken" -tag 'integration' {
@@ -7,32 +10,42 @@ Describe "New-AccessToken" -tag 'integration' {
     Context "supplying a valid refresh token" {
 
         #arrange
-        $Parent = Split-Path -Parent $here
+        $FuelCloudSettings = Import-Clixml (Join-Path $Parent 'Settings.FuelCloud.xml')
 
-        $AccessToken = Get-Content -Path "$Parent\AccessToken.txt" -Raw
-        Write-Debug "AccessToken: $AccessToken"    
-        $PSDefaultParameterValues['*:AccessToken'] = $AccessToken
-
-        $RefreshToken = Get-Content -Path "$Parent\RefreshToken.txt" -Raw
-        Write-Debug "RefreshToken: $RefreshToken"
+        Write-Debug "AccessToken: $($FuelCloudSettings.AccessToken)"
+        Write-Debug "RefreshToken: $($FuelCloudSettings.RefreshToken)"
 
         It "creates a new access token" {
             # act
-            $Actual = New-AccessToken -AccessToken $AccessToken -RefreshToken $RefreshToken
+            $Actual = New-AccessToken -AccessToken $FuelCloudSettings.AccessToken -RefreshToken $FuelCloudSettings.RefreshToken
 
             # assert
-            $Actual | Should -BeLike 'Bearer *'
+            $Actual.access_token | Should -BeLike 'Bearer *'
+            $Actual.refresh_token | Should -Not -BeNullOrEmpty
+            $Actual.expires_at | Should -BeOfType DateTime
+        }  
+  
+    }
+
+    Context "supplying an invalid access token" {
+
+        #arrange
+        $AccessToken = 'invalid access token'
+
+        It "throws a Not Found (404) exception" {
+            # act / assert
+            { New-AccessToken -AccessToken $AccessToken -RefreshToken $FuelCloudSettings.RefreshToken  -ErrorAction Stop} | Should -Throw "Response status code does not indicate success: 404 (Not Found)."
         }    
     }
 
-    Context "supplying an INvalid refresh token" {
+    Context "supplying an invalid refresh token" {
 
         #arrange
-        $RefreshToken = 'invalid token'
+        $RefreshToken = 'invalid refresh token'
 
-        It "throws an exception" {
+        It "throws a Not Found (404) exception" {
             # act / assert
-            { New-AccessToken -RefreshToken $RefreshToken  -ErrorAction Stop} | Should -Throw # ""
+            { New-AccessToken -AccessToken $FuelCloudSettings.AccessToken -RefreshToken $RefreshToken  -ErrorAction Stop} | Should -Throw "Response status code does not indicate success: 404 (Not Found)."
         }    
     }
 
