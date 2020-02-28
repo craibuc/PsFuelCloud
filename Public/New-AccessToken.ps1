@@ -27,10 +27,17 @@ function New-AccessToken {
     $Uri = "https://api.fuelcloud.com/rest/v1.0/refresh-token/$RefreshToken"
 	Write-Debug "Uri: $Uri"
 
-    $Content = ( Invoke-WebRequest -Uri $uri -Method Get -ContentType "application/x-www-form-urlencoded" ).Content | ConvertFrom-Json
+    $Content = ( Invoke-WebRequest -Uri $Uri -Method Get -ContentType "application/x-www-form-urlencoded" ).Content | ConvertFrom-Json
 
     # returns PsCustomObject representation of object
-    if ( $Content.data ) { $Content.data }
+    if ( $Content )
+    {
+        [PSCustomObject]@{
+            access_token = $Content.type + ' ' + $Content.access_token
+            refresh_token = $Content.refresh_token
+            expires_at = (Get-Date).AddSeconds($Content.expires_in)
+        }
+    }
 
     # otherwise raise an exception
     elseif ($Content.error) { Write-Error -Message $Content.error.message }
