@@ -49,9 +49,9 @@ Describe "New-AccessToken" -tag 'unit' {
         It "returns the expected response" {
 
             # assert
-            $Actual.access_token | Should -Be ($Content.type + ' ' + $Content.access_token)
-            $Actual.refresh_token | Should -Be $Content.refresh_token
-            $Actual.expires_at | Should -BeOfType DateTime
+            $Actual.AccessToken | Should -Be ($Content.type + ' ' + $Content.access_token)
+            $Actual.RefreshToken | Should -Be $Content.refresh_token
+            $Actual.Expires | Should -BeOfType DateTime
     
         }    
 
