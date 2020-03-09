@@ -18,7 +18,7 @@ $SettingsPath = Join-Path $Parent 'Settings.FuelCloud.xml'
 Write-Host "Go to https://dashboard.fuelcloud.com/account/api`n"
 
 # prompt for values
-@{
+[PsCustomObject]@{
     AccessToken = Read-Host "Supply the 'Access Token' value"
     RefreshToken = Read-Host "Supply the 'Refresh Token' value"
     Expires=Read-Host "Supply the 'Expire' value"
