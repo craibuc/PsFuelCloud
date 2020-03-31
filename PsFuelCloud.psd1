@@ -76,6 +76,7 @@ FunctionsToExport = @(
     'Get-Driver', 'New-Driver', 'Set-Driver'
     'Get-Tank', 'Set-Tank'
     'Get-Vehicle', 'New-Vehicle', 'Set-Vehicle'
+    'Save-Settings'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
