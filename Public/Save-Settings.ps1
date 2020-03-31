@@ -1,5 +1,5 @@
 <#
-.SYNOPIS
+.SYNOPSIS
 Saves Fuel Cloud settings to a file in the module's root directory.
 
 .EXAMPLE
@@ -10,9 +10,8 @@ $FuelCloudSettings = Import-Clixml (Join-Path $Parent 'Settings.FuelCloud.xml')
 
 #>
 
-# script's location
-$Here = Split-Path -Parent $MyInvocation.MyCommand.Path  # WindowsPowerShell\Modules\PsFuelCloud\Public
-$Parent = Split-Path -Parent $here  # WindowsPowerShell\Modules\PsFuelCloud\
+# settings' location
+$Parent = Split-Path -Path $PSScriptRoot -Parent
 $SettingsPath = Join-Path $Parent 'Settings.FuelCloud.xml'
 
 Write-Host "Go to https://dashboard.fuelcloud.com/account/api`n"
@@ -26,4 +25,4 @@ Write-Host "Go to https://dashboard.fuelcloud.com/account/api`n"
 # save as Xml
 Export-Clixml $SettingsPath
 
-Write-Host "S`nettings saved to $SettingsPath"
+Write-Host "Settings saved to $SettingsPath"
