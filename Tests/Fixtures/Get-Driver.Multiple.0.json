@@ -1,0 +1,222 @@
+{
+    "data": [
+        {
+            "id": 111111,
+            "fullname": "Last, First",
+            "full_name": "Last, First",
+            "pin": "99999",
+            "phone": null,
+            "code": null,
+            "status": 1,
+            "schedule": {
+                "mon": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "tue": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "wed": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "thu": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "fri": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "sat": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "sun": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                }
+            },
+            "all_tanks": true,
+            "tanks": [],
+            "all_vehicles": true,
+            "vehicles": [],
+            "self": "https://api.fuelcloud.com/rest/v1.0/driver/111111",
+            "limits": null,
+            "accumulated": null,
+            "custom_data_field": [
+                {
+                    "id": 4,
+                    "label": null,
+                    "value": null
+                },
+                {
+                    "id": 5,
+                    "label": null,
+                    "value": null
+                },
+                {
+                    "id": 6,
+                    "label": null,
+                    "value": null
+                }
+            ],
+            "access_groups": []
+        },
+        {
+            "id": 222222,
+            "fullname": "Last, First",
+            "full_name": "Last, First",
+            "pin": "99999",
+            "phone": null,
+            "code": null,
+            "status": 1,
+            "schedule": {
+                "mon": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "tue": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "wed": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "thu": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "fri": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "sat": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                },
+                "sun": {
+                    "start_hour": "",
+                    "start_min": "00",
+                    "start_meridiem": "am",
+                    "end_hour": "",
+                    "end_min": "00",
+                    "end_meridiem": "am",
+                    "status": 1,
+                    "all": 1
+                }
+            },
+            "all_tanks": true,
+            "tanks": [],
+            "all_vehicles": true,
+            "vehicles": [],
+            "self": "https://api.fuelcloud.com/rest/v1.0/driver/222222",
+            "limits": null,
+            "accumulated": null,
+            "custom_data_field": [
+                {
+                    "id": 4,
+                    "label": null,
+                    "value": null
+                },
+                {
+                    "id": 5,
+                    "label": null,
+                    "value": null
+                },
+                {
+                    "id": 6,
+                    "label": null,
+                    "value": null
+                }
+            ],
+            "access_groups": []
+        }
+    ],
+    "meta": {
+        "previous": null,
+        "total": 2,
+        "per_page": 50,
+        "next": "https://api.fuelcloud.com/rest/v1.0/driver?page%5Bnumber%5D=2"
+    }
+}
