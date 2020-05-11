@@ -1,8 +1,16 @@
-$here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
-. "$here\$sut"
+# /PsFuelCloud
+$ProjectDirectory = Split-Path -Path (Split-Path -Path $PSScriptRoot -Parent) -Parent
 
-Describe "Get-SmartDate" {
+# /PsFuelCloud/PsFuelCloud/Public
+$PublicPath = Join-Path $ProjectDirectory "/PsFuelCloud/Public/"
+
+# Get-SmartDate.ps1
+$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
+
+# . /PsFuelCloud/PsFuelCloud/Public/Get-SmartDate.ps1
+. Join-Path $PublicPath $sut
+
+Describe "Get-SmartDate" -tag 'unit' {
 
     Context "Yesterday" {
         #arrange
