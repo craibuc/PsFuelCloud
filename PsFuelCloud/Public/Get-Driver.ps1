@@ -7,6 +7,7 @@ function Get-Driver {
     [CmdletBinding()]
     param
     (
+        [Parameter(Mandatory)]
         [string]$AccessToken,
 
         [int]$Id
