@@ -11,7 +11,7 @@ $FixturesDirectory = Join-Path $ProjectDirectory "/Tests/Fixtures/"
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 
 # . /PsFuelCloud/PsFuelCloud/Public/Get-Driver.ps1
-. Join-Path $PublicPath $sut
+. (Join-Path $PublicPath $sut)
 
 Describe "Get-Driver" -tag 'unit' {
 
