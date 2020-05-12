@@ -1,0 +1,154 @@
+{
+    "data": [
+        {
+            "id": 111111,
+            "name": "Diesel",
+            "code": null,
+            "resource_uri": "https://api.fuelcloud.com/rest/v1.0/tank/111111",
+            "tank_shape": "rectangular",
+            "tank_capacity": 10000.00,
+            "current_inventory": 6000.000,
+            "low_level": 35,
+            "critical_low_level": 25,
+            "high_level": 90,
+            "critical_high_level": 95,
+            "tank_product": 883,
+            "product": {
+                "id": 883,
+                "product_name": "BIO-DIESEL B5",
+                "product_category": "diesel"
+            },
+            "inventory_level": "normal",
+            "price_per_unit": 2.50000,
+            "variance_tolerance": 5,
+            "fuel_temp": null,
+            "status": 1,
+            "inventory_unit": "Gallons",
+            "site": {
+                "id": 999999,
+                "name": "Xylite",
+                "resource_uri": "https://api.fuelcloud.com/rest/v1.0/site/999999",
+                "address": "address",
+                "city": "city",
+                "state": "US-XX",
+                "country": "US",
+                "latitude": 45.0,
+                "longitude": -93.0,
+                "zip": "12345"
+            },
+            "pump": {
+                "888888": {
+                    "device_id": 888888,
+                    "label": "Pump 4",
+                    "serial": "ABCDEFGHIJKLM",
+                    "port": 5,
+                    "unit": 0,
+                    "pulse_rate": 100
+                }
+            },
+            "access_groups": []
+        },
+        {
+            "id": 222222,
+            "name": "Propane",
+            "code": null,
+            "resource_uri": "https://api.fuelcloud.com/rest/v1.0/tank/222222",
+            "tank_shape": "cylinder-h",
+            "tank_capacity": 20000.00,
+            "current_inventory": 15000.000,
+            "low_level": 35,
+            "critical_low_level": 25,
+            "high_level": null,
+            "critical_high_level": null,
+            "tank_product": 453,
+            "product": {
+                "id": 453,
+                "product_name": "PROPANE",
+                "product_category": "special"
+            },
+            "inventory_level": "normal",
+            "price_per_unit": 1.00000,
+            "variance_tolerance": 5,
+            "fuel_temp": null,
+            "status": 1,
+            "inventory_unit": "Gallons",
+            "site": {
+                "id": 999999,
+                "name": "Xylite",
+                "resource_uri": "https://api.fuelcloud.com/rest/v1.0/site/999999",
+                "address": "address",
+                "city": "city",
+                "state": "US-XX",
+                "country": "US",
+                "latitude": 45.0,
+                "longitude": -93.0,
+                "zip": "12345"
+            },
+            "pump": {
+                "888888": {
+                    "device_id": 888888,
+                    "label": "Pump 1",
+                    "serial": "ABCDEFGHIJKLM",
+                    "port": 4,
+                    "unit": 1,
+                    "pulse_rate": 100
+                }
+            },
+            "access_groups": []
+        },
+        {
+            "id": 333333,
+            "name": "Unleaded",
+            "code": null,
+            "resource_uri": "https://api.fuelcloud.com/rest/v1.0/tank/333333",
+            "tank_shape": "cylinder-h",
+            "tank_capacity": 10000.00,
+            "current_inventory": 9000.0000,
+            "low_level": 25,
+            "critical_low_level": 10,
+            "high_level": 90,
+            "critical_high_level": 95,
+            "tank_product": 437,
+            "product": {
+                "id": 437,
+                "product_name": "UNLEADED",
+                "product_category": "gasoline"
+            },
+            "inventory_level": "normal",
+            "price_per_unit": 1.25000,
+            "variance_tolerance": 5,
+            "fuel_temp": null,
+            "status": 1,
+            "inventory_unit": "Gallons",
+            "site": {
+                "id": 999999,
+                "name": "Xylite",
+                "resource_uri": "https://api.fuelcloud.com/rest/v1.0/site/999999",
+                "address": "address",
+                "city": "city",
+                "state": "US-XX",
+                "country": "US",
+                "latitude": 45.0,
+                "longitude": -93.0,
+                "zip": "12345"
+            },
+            "pump": {
+                "888888": {
+                    "device_id": 888888,
+                    "label": "Pump 6",
+                    "serial": "ABCDEFGHIJKLM",
+                    "port": 3,
+                    "unit": 1,
+                    "pulse_rate": 100
+                }
+            },
+            "access_groups": []
+        }
+    ],
+    "meta": {
+        "previous": null,
+        "total": 3,
+        "per_page": 50,
+        "next": null
+    }
+}

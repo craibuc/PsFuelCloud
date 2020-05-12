@@ -1,0 +1,58 @@
+{
+    "data": [
+        {
+            "id": 111111,
+            "name": "Diesel",
+            "code": null,
+            "resource_uri": "https://api.fuelcloud.com/rest/v1.0/tank/111111",
+            "tank_shape": "rectangular",
+            "tank_capacity": 10000.00,
+            "current_inventory": 5000.0000,
+            "low_level": 35,
+            "critical_low_level": 25,
+            "high_level": 90,
+            "critical_high_level": 95,
+            "tank_product": 111,
+            "product": {
+                "id": 111,
+                "product_name": "BIO-DIESEL B5",
+                "product_category": "diesel"
+            },
+            "inventory_level": "normal",
+            "price_per_unit": 2.50000,
+            "variance_tolerance": 5,
+            "fuel_temp": null,
+            "status": 1,
+            "inventory_unit": "Gallons",
+            "site": {
+                "id": 999999,
+                "name": "sitename",
+                "resource_uri": "https://api.fuelcloud.com/rest/v1.0/site/999999",
+                "address": "address",
+                "city": "city",
+                "state": "US-XX",
+                "country": "US",
+                "latitude": 45.0,
+                "longitude": -93.0,
+                "zip": "12345"
+            },
+            "pump": {
+                "888888": {
+                    "device_id": 888888,
+                    "label": "Pump 4",
+                    "serial": "ABCDEFGHIJKLM",
+                    "port": 5,
+                    "unit": 0,
+                    "pulse_rate": 100
+                }
+            },
+            "access_groups": []
+        }
+    ],
+    "meta": {
+        "previous": null,
+        "total": 1,
+        "per_page": 50,
+        "next": null
+    }
+}
