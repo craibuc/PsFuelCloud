@@ -32,12 +32,39 @@ Describe "Get-Driver" -tag 'unit' {
 
         Context 'Id' {
             $ParameterName = 'Id'
+            $ParameterSetName = 'ById'
 
             It "is an [int]" {
                 $Command | Should -HaveParameter $ParameterName -Type int
             }
-            It "is optional" {
-                $Command | Should -HaveParameter $ParameterName -Not -Mandatory
+            It "is mandatory member of '$ParameterSetName' parameter set" {
+                $Command.parameters[$ParameterName].parametersets[$ParameterSetName].IsMandatory | Should -Be $true
+            }
+
+        }
+
+        Context 'StartingDate' {
+            $ParameterName = 'StartingDate'
+            $ParameterSetName = 'ByDate'
+
+            It "is a [datetime]" {
+                $Command | Should -HaveParameter $ParameterName -Type datetime
+            }
+            It "is mandatory member of '$ParameterSetName' parameter set" {
+                $Command.parameters[$ParameterName].parametersets[$ParameterSetName].IsMandatory | Should -Be $false
+            }
+
+        }
+
+        Context 'EndingDate' {
+            $ParameterName = 'EndingDate'
+            $ParameterSetName = 'ByDate'
+
+            It "is a [datetime]" {
+                $Command | Should -HaveParameter $ParameterName -Type datetime
+            }
+            It "is mandatory member of '$ParameterSetName' parameter set" {
+                $Command.parameters[$ParameterName].parametersets[$ParameterSetName].IsMandatory | Should -Be $false
             }
 
         }
@@ -147,6 +174,52 @@ Describe "Get-Driver" -tag 'unit' {
 
     } # /context (id)
 
+    Context "-StartingDate and -EndingDate" {
+
+        # arrange
+        $AccessToken = 'BEARER 01234567897abcdefghijklmnopqurtuvwxyz'
+        $StartingDate = '05/01/2020'
+        $EndingDate = '05/02/2020'
+
+        Mock Invoke-WebRequest {
+            $Fixture = 'Get-Driver.Multiple.1.json'
+            $Content = Get-Content (Join-Path $FixturesDirectory $Fixture) -Raw
+
+            $Response = New-MockObject -Type  Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject
+            $Response | Add-Member -Type NoteProperty -Name 'Content' -Value $Content -Force
+            $Response
+        }
+
+        BeforeEach {
+            # act
+            $Actual = Get-Driver -AccessToken $AccessToken -StartingDate $StartingDate -EndingDate $EndingDate
+        }
+
+        it "makes the correct request" {
+
+            # arrange
+            $Expected = @{
+                Uri="https://api.fuelcloud.com/rest/v1.0/driver"
+                Headers = @{
+                    "Content-Type"='application/json'
+                }
+            }
+
+            # assert
+            Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                $Method -eq 'Get' -and
+                $Uri -eq "$($Expected.Uri)/"
+                $ContentType -eq $Expected.Headers."Content-Type"
+                $Headers.Authorization -eq $AccessToken
+            }  -Times 1 -Exactly
+        }
+
+        It "returns the specified driver" {
+            # assert
+            $Actual | Should -HaveCount 2
+        }
+
+    }
 
     Context "Invalid credentials supplied" {
 
