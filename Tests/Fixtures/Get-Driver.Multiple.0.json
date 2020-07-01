@@ -85,6 +85,8 @@
             "all_vehicles": true,
             "vehicles": [],
             "self": "https://api.fuelcloud.com/rest/v1.0/driver/111111",
+            "created": "2020-05-01 12:00:00",
+            "updated": "2020-06-01 12:00:00",
             "limits": null,
             "accumulated": null,
             "custom_data_field": [
@@ -191,6 +193,8 @@
             "all_vehicles": true,
             "vehicles": [],
             "self": "https://api.fuelcloud.com/rest/v1.0/driver/222222",
+            "created": "2020-04-01 00:00:00",
+            "updated": "2020-05-01 00:00:00",
             "limits": null,
             "accumulated": null,
             "custom_data_field": [
