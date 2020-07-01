@@ -1,0 +1,119 @@
+{
+    "data": [
+        {
+            "id": 123456,
+            "resource_uri": "https://api.fuelcloud.com/rest/v1.0/vehicle/123456",
+            "name": "000000",
+            "code": "0000AAA",
+            "status": 1,
+            "taxable": "fed_state",
+            "created": "2018-11-02 00:00:00",
+            "updated": "2020-02-21 00:00:00",
+            "tank_capacity": 0,
+            "product_type": "Diesel",
+            "product": [
+                {
+                    "id": 402,
+                    "name": "BIO-DIESEL B100"
+                },
+                {
+                    "id": 404,
+                    "name": "BIO-DIESEL B15"
+                },
+                {
+                    "id": 406,
+                    "name": "BIO-DIESEL B5"
+                },
+                {
+                    "id": 408,
+                    "name": "DIESEL #1"
+                },
+                {
+                    "id": 410,
+                    "name": "MARKED RED DIESEL"
+                },
+                {
+                    "id": 414,
+                    "name": "OFF-ROAD BIO-DIESEL B100"
+                },
+                {
+                    "id": 417,
+                    "name": "OFF-ROAD BIO-DIESEL B2"
+                },
+                {
+                    "id": 419,
+                    "name": "OFF-ROAD BIO-DIESEL B5"
+                },
+                {
+                    "id": 420,
+                    "name": "OFF-ROAD BIO-DIESEL B99"
+                },
+                {
+                    "id": 421,
+                    "name": "PREMIUM DIESEL #2"
+                },
+                {
+                    "id": 422,
+                    "name": "RED ULTRA LOW #1"
+                },
+                {
+                    "id": 424,
+                    "name": "ULTRA LOW DIESEL #1"
+                },
+                {
+                    "id": 425,
+                    "name": "ULTRA LOW DIESEL #2"
+                },
+                {
+                    "id": 426,
+                    "name": "ULTRA LOW PREMIUM DIESEL"
+                },
+                {
+                    "id": 881,
+                    "name": "B5 Diesel"
+                },
+                {
+                    "id": 883,
+                    "name": "BIO-DIESEL B5"
+                },
+                {
+                    "id": 25858,
+                    "name": "Diesel"
+                },
+                {
+                    "id": 25859,
+                    "name": "Diesel Exhaust Fluid"
+                },
+                {
+                    "id": 25863,
+                    "name": "OFF-ROAD DIESEL"
+                }
+            ],
+            "custom_data_field": [
+                {
+                    "id": 1,
+                    "label": "Vehicle Type",
+                    "value": "Foo"
+                },
+                {
+                    "id": 2,
+                    "label": "Bar",
+                    "value": null
+                },
+                {
+                    "id": 3,
+                    "label": "Department",
+                    "value": "Baz"
+                }
+            ],
+            "access_groups": [],
+            "drivers": []
+        }
+    ],
+    "meta": {
+        "previous": null,
+        "total": 1,
+        "per_page": 50,
+        "next": null
+    }
+}
