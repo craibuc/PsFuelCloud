@@ -34,16 +34,18 @@ function Get-Driver {
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory)]
+        [Parameter(ParameterSetName='None',Mandatory)]
+        [Parameter(ParameterSetName='ById',Mandatory)]
+        [Parameter(ParameterSetName='ByDate')]
         [string]$AccessToken,
 
         [Parameter(ParameterSetName='ById',Mandatory)]
         [int]$Id,
 
-        [Parameter(ParameterSetName='ByDate')]
+        [Parameter(ParameterSetName='ByDate',Mandatory)]
         [datetime]$StartingDate,
 
-        [Parameter(ParameterSetName='ByDate')]
+        [Parameter(ParameterSetName='ByDate',Mandatory)]
         [datetime]$EndingDate
 
     )
@@ -89,18 +91,18 @@ function Get-Driver {
             } |
             ForEach-Object {
 
-                # full_name = surname, first_name
-                if ( $_.full_name -match ',' )
-                {
-                    $_ | Add-Member -NotePropertyName first_name -NotePropertyValue ($_.full_name -split ',')[1].Trim()
-                    $_ | Add-Member -NotePropertyName surname -NotePropertyValue ($_.full_name -split ',')[0].Trim()
-                }
-                # full_name = first_name surname
-                elseif ( $_.full_name -match ' ' )
-                {
-                    $_ | Add-Member -NotePropertyName first_name -NotePropertyValue ($_.full_name -split ' ')[0].Trim()
-                    $_ | Add-Member -NotePropertyName surname -NotePropertyValue ($_.full_name -split ' ')[1].Trim()
-                }
+                # # full_name = surname, first_name
+                # if ( $_.full_name -match ',' )
+                # {
+                #     $_ | Add-Member -NotePropertyName first_name -NotePropertyValue ($_.full_name -split ',')[1].Trim()
+                #     $_ | Add-Member -NotePropertyName surname -NotePropertyValue ($_.full_name -split ',')[0].Trim()
+                # }
+                # # full_name = first_name surname
+                # elseif ( $_.full_name -match ' ' )
+                # {
+                #     $_ | Add-Member -NotePropertyName first_name -NotePropertyValue ($_.full_name -split ' ')[0].Trim()
+                #     $_ | Add-Member -NotePropertyName surname -NotePropertyValue ($_.full_name -split ' ')[1].Trim()
+                # }
 
                 # rename created --> created_utc
                 $created_utc = [datetime]$_.created
