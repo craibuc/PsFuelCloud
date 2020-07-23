@@ -51,7 +51,7 @@ Describe "Get-Driver" -tag 'unit' {
                 $Command | Should -HaveParameter $ParameterName -Type datetime
             }
             It "is mandatory member of '$ParameterSetName' parameter set" {
-                $Command.parameters[$ParameterName].parametersets[$ParameterSetName].IsMandatory | Should -Be $false
+                $Command.parameters[$ParameterName].parametersets[$ParameterSetName].IsMandatory | Should -Be $true
             }
 
         }
@@ -64,7 +64,7 @@ Describe "Get-Driver" -tag 'unit' {
                 $Command | Should -HaveParameter $ParameterName -Type datetime
             }
             It "is mandatory member of '$ParameterSetName' parameter set" {
-                $Command.parameters[$ParameterName].parametersets[$ParameterSetName].IsMandatory | Should -Be $false
+                $Command.parameters[$ParameterName].parametersets[$ParameterSetName].IsMandatory | Should -Be $true
             }
 
         }
@@ -128,7 +128,7 @@ Describe "Get-Driver" -tag 'unit' {
 
     } # /context (default parameters)
 
-    Context '-Id' {
+    Context 'ById' {
 
         # arrange
         $AccessToken = 'BEARER 01234567897abcdefghijklmnopqurtuvwxyz'
@@ -174,7 +174,7 @@ Describe "Get-Driver" -tag 'unit' {
 
     } # /context (id)
 
-    Context "-StartingDate and -EndingDate" {
+    Context "ByDate" {
 
         # arrange
         $AccessToken = 'BEARER 01234567897abcdefghijklmnopqurtuvwxyz'
