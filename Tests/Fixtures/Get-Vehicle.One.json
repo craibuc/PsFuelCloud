@@ -1,8 +1,8 @@
 {
     "data": [
         {
-            "id": 123456,
-            "resource_uri": "https://api.fuelcloud.com/rest/v1.0/vehicle/123456",
+            "id": 111111,
+            "resource_uri": "https://api.fuelcloud.com/rest/v1.0/vehicle/111111",
             "name": "000000",
             "code": "0000AAA",
             "status": 1,
