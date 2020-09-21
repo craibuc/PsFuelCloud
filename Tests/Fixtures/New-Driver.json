@@ -1,0 +1,93 @@
+{
+    "data": [
+      {
+        "id": 414940,
+        "fullname": "New Driver",
+        "full_name": "New Driver",
+        "pin": "68888",
+        "phone": "503-379-0000",
+        "code": "D1121987",
+        "status": 1,
+        "schedule": {
+          "mon": {
+            "start_hour": "09",
+            "start_min": "00",
+            "start_meridiem": "am",
+            "end_hour": "05",
+            "end_min": "00",
+            "end_meridiem": "pm",
+            "status": 1,
+            "all": 0
+          },
+          "tue": {
+            "start_hour": "09",
+            "start_min": "00",
+            "start_meridiem": "am",
+            "end_hour": "05",
+            "end_min": "00",
+            "end_meridiem": "pm",
+            "status": 1,
+            "all": 0
+          },
+          "wed": {
+            "start_hour": "09",
+            "start_min": "00",
+            "start_meridiem": "am",
+            "end_hour": "05",
+            "end_min": "00",
+            "end_meridiem": "pm",
+            "status": 1,
+            "all": 0
+          },
+          "thu": {
+            "status": 1,
+            "all": 1
+          },
+          "fri": {
+            "status": 1,
+            "all": 1
+          },
+          "sat": {
+            "status": 0,
+            "all": 0
+          },
+          "sun": {
+            "status": 0,
+            "all": 0
+          }
+        },
+        "all_tanks": true,
+        "tanks": [],
+        "all_vehicles": true,
+        "vehicles": [],
+        "self": "https://api.fuelcloud.com/rest/v1.0/driver/414940",
+        "limits": null,
+        "accumulated": null,
+        "custom_data_field": [
+          {
+            "id": 4,
+            "label": "Driver Fuel Card #1",
+            "value": "12345"
+          },
+          {
+            "id": 5,
+            "label": "Department",
+            "value": "Police"
+          },
+          {
+            "id": 6,
+            "label": "State",
+            "value": "Oregon"
+          }
+        ],
+        "access_groups": []
+      }
+    ],
+    "meta": {
+      "previous": null,
+      "total": 1,
+      "per_page": 50,
+      "next": null
+    }
+  }
+  
