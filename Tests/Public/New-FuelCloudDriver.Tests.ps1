@@ -7,17 +7,17 @@ $PublicPath = Join-Path $ProjectDirectory "/PsFuelCloud/Public/"
 # /PsFuelCloud/Tests/Fixtures/
 $FixturesDirectory = Join-Path $ProjectDirectory "/Tests/Fixtures/"
 
-# New-Driver.ps1
+# New-FuelCloudDriver.ps1
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 
-# . /PsFuelCloud/PsFuelCloud/Public/New-Driver.ps1
+# . /PsFuelCloud/PsFuelCloud/Public/New-FuelCloudDriver.ps1
 . (Join-Path $PublicPath $sut)
 
-Describe "New-Driver" -tag 'unit' {
+Describe "New-FuelCloudDriver" -tag 'unit' {
 
     Context "Parameter validation" {
         BeforeAll {
-            $Command = Get-Command 'New-Driver'
+            $Command = Get-Command 'New-FuelCloudDriver'
         }
 
         Context 'AccessToken' {
@@ -110,7 +110,7 @@ Describe "New-Driver" -tag 'unit' {
 
         It "creates the correct request and returns the expected response" {
             # act
-            $Actual = New-Driver -AccessToken AccessToken @Driver
+            $Actual = New-FuelCloudDriver -AccessToken AccessToken @Driver
 
             # assert 
             Assert-MockCalled Invoke-WebRequest -ParameterFilter {

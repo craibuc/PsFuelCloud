@@ -23,7 +23,7 @@ The driver's code.
 https://developer.fuelcloud.com/?version=latest#5cb824b2-7faf-46a2-98b1-698e79d4786e
 
 #>
-function New-Driver {
+function New-FuelCloudDriver {
     
     [CmdletBinding()]
     param
