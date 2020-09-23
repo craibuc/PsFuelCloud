@@ -12,7 +12,7 @@
 RootModule = 'PsFuelCloud.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.4.0'
+ModuleVersion = '0.5.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -73,7 +73,7 @@ FunctionsToExport = @(
     'Get-Product', 'Get-Site', 'Get-SmartDate', 'Get-Timezone', 'Get-Transaction'
     'New-AccessToken'
     'Save-Settings', 
-    'Get-Driver', 'New-Driver', 'Set-Driver'
+    'Get-Driver', 'New-FuelCloudDriver', 'Set-Driver'
     'Get-Tank', 'Set-Tank'
     'Get-Vehicle', 'New-Vehicle', 'Set-Vehicle'
 )
