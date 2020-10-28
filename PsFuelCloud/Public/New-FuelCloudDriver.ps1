@@ -1,23 +1,21 @@
 <#
 .SYNOPSIS
-Labore labore ea est sint deserunt excepteur cillum sit elit et eiusmod nisi est magna.
+Create a new FuelCloud driver.
 
 .PARAMETER AccessToken
-
-.PARAMETER id
-The driver's ID.
+Bearer token.
 
 .PARAMETER full_name
 The driver's full name.
 
-.PARAMETER pin
-The driver's PIN.
-
-.PARAMETER phone
-The driver's phone.
-
 .PARAMETER code
 The driver's code.
+
+.PARAMETER phone
+The driver's telephone #.
+
+.PARAMETER pin
+The driver's PIN (5-digit numeric value, from 00000 to 99999).  If not provided, a PIN will be generated.
 
 .LINK
 https://developer.fuelcloud.com/?version=latest#5cb824b2-7faf-46a2-98b1-698e79d4786e
@@ -31,28 +29,21 @@ function New-FuelCloudDriver {
         [Parameter(Mandatory)]
         [string]$AccessToken,
 
-        [Parameter(Mandatory)]
+        [Parameter(ValueFromPipelineByPropertyName, Mandatory)]
         [string]$full_name,
 
-        [Parameter()]
+        [Parameter(ValueFromPipelineByPropertyName)]
+        [string]$code,
+
+        [Parameter(ValueFromPipelineByPropertyName)]
         [string]$phone,
 
-        [Parameter()]
-        [int]$pin,
-
-        [Parameter()]
-        [string]$code
+        [Parameter(ValueFromPipelineByPropertyName)]
+        [ValidateRange(0,99999)]
+        [int]$pin
     )
 
     begin {
-
-        Write-Debug "$($MyInvocation.MyCommand.Name)"
-        Write-Debug "AccessToken: $AccessToken"
-        Write-Debug "full_name: $full_name"
-        Write-Debug "pin: $pin"
-        Write-Debug "phone: $phone"
-        Write-Debug "code: $code"
-        
         $Uri = "https://api.fuelcloud.com/rest/v1.0/driver/"
         Write-Debug "Uri: $Uri"
     
@@ -63,12 +54,12 @@ function New-FuelCloudDriver {
     
         $Body = @{}
         if ($full_name) { $Body['full_name']=$full_name }
-        if ($pin) { $Body['pin']=$pin }
+        # ensure pin is between 00000 and 99999
+        if ($pin) { $Body['pin']=$pin.ToString().PadLeft(5,'0') }
         if ($phone) { $Body['phone']=$phone }
         if ($code) { $Body['code']=$code }
-        if ($status) { $Body['status']=$status }
     
-        # PATCH
+        # POST
         $Content = ( Invoke-WebRequest -Uri $uri -Method Post -Body $Body -ContentType "application/json" -Headers $Headers ).Content | ConvertFrom-Json
     
         # returns PsCustomObject representation of object
