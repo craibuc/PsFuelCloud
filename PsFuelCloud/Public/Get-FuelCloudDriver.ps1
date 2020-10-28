@@ -16,12 +16,12 @@ Get-Driver -AccessToken $AccessToken
 All driver records
 
 .EXAMPLE
-Get-Driver -AccessToken $AccessToken -Id $Id
+Get-FuelCloudDriver -AccessToken $AccessToken -Id $Id
 
 Driver record identified by Id
 
 .EXAMPLE
-Get-Driver -AccessToken $AccessToken -StartingDate $StartingDate -EndingDate $EndingDate
+Get-FuelCloudDriver -AccessToken $AccessToken -StartingDate $StartingDate -EndingDate $EndingDate
 
 Driver records created or modified within date range.
 
@@ -29,7 +29,7 @@ Driver records created or modified within date range.
     2020-07-01 - CB - adding StartingDate/EndingDate parameters and associated filtering logic; renaming created-->created_utc; renaming updated-->updated_utc; adding new created and update (local time)
     2020-01-27 - CB - adding loop
 #>
-function Get-Driver {
+function Get-FuelCloudDriver {
 
     [CmdletBinding()]
     param
