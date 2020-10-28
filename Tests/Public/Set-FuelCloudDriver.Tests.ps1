@@ -84,7 +84,7 @@ Describe "Set-FuelCloudDriver" -tag 'unit' {
                 $Command | Should -HaveParameter $ParameterName -Not -Mandatory
             }
             It "is 5, numeric digits in length" {
-                $Attribute = $command.Parameters['pin'].Attributes | Where-Object { $_.TypeId -eq [System.Management.Automation.ValidateRangeAttribute] }
+                $Attribute = $command.Parameters[$ParameterName].Attributes | Where-Object { $_.TypeId -eq [System.Management.Automation.ValidateRangeAttribute] }
                 $Attribute.MinRange | Should -Be 0
                 $Attribute.MaxRange | Should -Be 99999
             }
@@ -112,8 +112,137 @@ Describe "Set-FuelCloudDriver" -tag 'unit' {
             It "is optional" {
                 $Command | Should -HaveParameter $ParameterName -Not -Mandatory
             }
+            It "is 0 or 1" {
+                $Attribute = $command.Parameters[$ParameterName].Attributes | Where-Object { $_.TypeId -eq [System.Management.Automation.ValidateRangeAttribute] }
+                $Attribute.MinRange | Should -Be 0
+                $Attribute.MaxRange | Should -Be 1
+            }
+
         }
 
     } # /context (parameter validation)
+
+    Context "Usage" {
+    
+        BeforeAll {
+
+            # arrange
+            $AccessToken = '7522a674-f71d-4c51-ba0c-c8cff735d6b5'
+
+            $Driver = @{
+                id = 123456
+                full_name = 'First Last'
+                pin = 99999
+                code = 'FL1234'
+                phone = '1234567890'
+                status = 0
+            }
+
+            Mock Invoke-WebRequest {
+                $Fixture = 'Set-FuelCloudDriver.Response.json'
+                $Content = Get-Content (Join-Path $FixturesDirectory $Fixture) -Raw
+
+                $Response = New-MockObject -Type  Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject
+                $Response | Add-Member -Type NoteProperty -Name 'Content' -Value $Content -Force
+                $Response
+            }
+
+        }
+
+        BeforeEach {
+            # act
+            $Actual = Set-FuelCloudDriver -AccessToken $AccessToken @Driver
+        }
+
+        Context "Request" {
+
+            It "add the Access Token to the Authorization header" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Headers.Authorization -eq $AccessToken
+                }
+            }
+
+            It "sends a PATCH request" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Method -eq 'Patch'
+                }
+            }
+
+            It "sends a request to the specified Uri" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Uri -eq "https://api.fuelcloud.com/rest/v1.0/driver/$( $Driver.id )"
+                }
+            }
+
+            It "sets the full_name property correctly" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Body.full_name -eq $Driver.full_name
+                }
+            }
+
+            It "sets the pin property correctly" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Body.pin -eq $Driver.pin
+                }
+            }
+
+            It "sets the phone property correctly" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Body.phone -eq $Driver.phone
+                }
+            }
+
+            It "sets the code property correctly" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Body.code -eq $Driver.code
+                }
+            }
+
+            It "sets the status property correctly" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Driver.status ? $Body.status -eq $Driver.status : $Body.status -eq 0
+                }
+            }
+    
+        } # /context request
+
+        Context "Response" {
+
+            It "sets the full_name property correctly" {
+                # assert 
+                $Actual.full_name -eq $Driver.full_name
+            }
+
+            It "sets the pin property correctly" {
+                # assert 
+                $Actual.pin -eq $Driver.pin
+            }
+
+            It "sets the phone property correctly" {
+                # assert 
+                $Actual.phone -eq $Driver.phone
+            }
+
+            It "sets the code property correctly" {
+                # assert 
+                $Actual.code -eq $Driver.code
+            }
+
+            It "sets the status property correctly" {
+                # assert 
+                $Actual.status -eq $Driver.status
+            }
+
+        } # /context response
+
+    } # /context Usage
 
 }
