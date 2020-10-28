@@ -66,6 +66,11 @@ Describe "New-FuelCloudDriver" -tag 'unit' {
             It "is optional" {
                 $Command | Should -HaveParameter $ParameterName -Not -Mandatory
             }
+            It "is 5, numeric digits in length" {
+                $Attribute = $command.Parameters['pin'].Attributes | Where-Object { $_.TypeId -eq [System.Management.Automation.ValidateRangeAttribute] }
+                $Attribute.MinRange | Should -Be 0
+                $Attribute.MaxRange | Should -Be 99999
+            }
         }
 
         Context 'code' {
