@@ -1,0 +1,72 @@
+{
+    "full_name": "driver nume",
+    "phone": "503-379-1111",
+    "code": "F8917",
+    "pin": "62624",
+    "status": 0,
+    "custom_data_field": [
+        {
+            "id": 4,
+            "label": "Driver Fuel Card #1",
+            "value": "669911"
+        },
+        {
+            "id": 5,
+            "label": "Department",
+            "value": "Fire"
+        },
+        {
+            "id": 6,
+            "label": "State",
+            "value": "Michigan"
+        }
+    ],
+    "schedule": {
+        "mon": {
+            "status": 1,
+            "all": 1
+        },
+        "tue": {
+            "status": 1,
+            "all": 1
+        },
+        "wed": {
+            "start_hour": "09",
+            "start_min": "00",
+            "start_meridiem": "am",
+            "end_hour": "05",
+            "end_min": "00",
+            "end_meridiem": "pm",
+            "status": 1,
+            "all": 0
+        },
+        "thu": {
+            "start_hour": "09",
+            "start_min": "00",
+            "start_meridiem": "am",
+            "end_hour": "05",
+            "end_min": "00",
+            "end_meridiem": "pm",
+            "status": 1,
+            "all": 0
+        },
+        "fri": {
+            "start_hour": "09",
+            "start_min": "00",
+            "start_meridiem": "am",
+            "end_hour": "05",
+            "end_min": "00",
+            "end_meridiem": "pm",
+            "status": 1,
+            "all": 0
+        },
+        "sat": {
+            "status": 0,
+            "all": 0
+        },
+        "sun": {
+            "status": 0,
+            "all": 0
+        }
+    }
+}

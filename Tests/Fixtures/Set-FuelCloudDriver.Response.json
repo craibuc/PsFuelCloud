@@ -1,0 +1,101 @@
+{
+    "data": [
+      {
+        "id": 408680,
+        "fullname": "driver nume",
+        "full_name": "driver nume",
+        "pin": "62624",
+        "phone": "503-379-1111",
+        "code": "F8917",
+        "status": 0,
+        "schedule": {
+          "mon": {
+            "status": 1,
+            "all": 1
+          },
+          "tue": {
+            "status": 1,
+            "all": 1
+          },
+          "wed": {
+            "start_hour": "09",
+            "start_min": "00",
+            "start_meridiem": "am",
+            "end_hour": "05",
+            "end_min": "00",
+            "end_meridiem": "pm",
+            "status": 1,
+            "all": 0
+          },
+          "thu": {
+            "start_hour": "09",
+            "start_min": "00",
+            "start_meridiem": "am",
+            "end_hour": "05",
+            "end_min": "00",
+            "end_meridiem": "pm",
+            "status": 1,
+            "all": 0
+          },
+          "fri": {
+            "start_hour": "09",
+            "start_min": "00",
+            "start_meridiem": "am",
+            "end_hour": "05",
+            "end_min": "00",
+            "end_meridiem": "pm",
+            "status": 1,
+            "all": 0
+          },
+          "sat": {
+            "status": 0,
+            "all": 0
+          },
+          "sun": {
+            "status": 0,
+            "all": 0
+          }
+        },
+        "all_tanks": true,
+        "tanks": [],
+        "all_vehicles": true,
+        "vehicles": [],
+        "self": "https://api.fuelcloud.com/rest/v1.0/driver/408680",
+        "limits": {
+          "dollar": {
+            "max": 50,
+            "period": "daily"
+          }
+        },
+        "accumulated": {
+          "amount": 0,
+          "transaction": 0,
+          "dollar": "0.000000"
+        },
+        "custom_data_field": [
+          {
+            "id": 4,
+            "label": "Dcd1",
+            "value": "669911"
+          },
+          {
+            "id": 5,
+            "label": null,
+            "value": "Fire"
+          },
+          {
+            "id": 6,
+            "label": null,
+            "value": "Michigan"
+          }
+        ],
+        "access_groups": []
+      }
+    ],
+    "meta": {
+      "previous": null,
+      "total": 1,
+      "per_page": 50,
+      "next": null
+    }
+}
