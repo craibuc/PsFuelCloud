@@ -103,7 +103,7 @@ Describe "New-FuelCloudDriver" -tag 'unit' {
             }
 
             Mock Invoke-WebRequest {
-                $Fixture = 'New-Driver.json'
+                $Fixture = 'New-FuelCloudDriver.Response.json'
                 $Content = Get-Content (Join-Path $FixturesDirectory $Fixture) -Raw
 
                 $Response = New-MockObject -Type  Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject
