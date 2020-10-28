@@ -13,11 +13,11 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 # . /PsFuelCloud/PsFuelCloud/Public/Get-Driver.ps1
 . (Join-Path $PublicPath $sut)
 
-Describe "Get-Driver" -tag 'unit' {
+Describe "Get-FuelCloudDriver" -tag 'unit' {
 
 
     Context "Parameter validation" {
-        $Command = Get-Command 'Get-Driver'
+        $Command = Get-Command 'Get-FuelCloudDriver'
 
         Context 'AccessToken' {
             $ParameterName = 'AccessToken'
@@ -80,7 +80,7 @@ Describe "Get-Driver" -tag 'unit' {
 
             Mock Invoke-WebRequest {
                 Write-Debug "***** Page 1 *****"
-                $Fixture = 'Get-Driver.Multiple.1.json'
+                $Fixture = 'Get-FuelCloudDriver.Multiple.1.json'
                 $Content = Get-Content (Join-Path $FixturesDirectory $Fixture) -Raw
 
                 $Response = New-MockObject -Type  Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject
@@ -90,7 +90,7 @@ Describe "Get-Driver" -tag 'unit' {
 
             Mock Invoke-WebRequest {
                 Write-Debug "***** Page 0 *****"
-                $Fixture = 'Get-Driver.Multiple.0.json'
+                $Fixture = 'Get-FuelCloudDriver.Multiple.0.json'
                 $Content = Get-Content (Join-Path $FixturesDirectory $Fixture) -Raw
 
                 $Response = New-MockObject -Type  Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject
@@ -99,7 +99,7 @@ Describe "Get-Driver" -tag 'unit' {
             } -ParameterFilter { $Uri -eq 'https://api.fuelcloud.com/rest/v1.0/driver' }
 
             # act
-            $Actual = Get-Driver -AccessToken $AccessToken
+            $Actual = Get-FuelCloudDriver -AccessToken $AccessToken
         }
 
         it "makes the correct request" {
@@ -135,7 +135,7 @@ Describe "Get-Driver" -tag 'unit' {
         $Id = 123456
 
         Mock Invoke-WebRequest {
-            $Fixture = 'Get-Driver.One.json'
+            $Fixture = 'Get-FuelCloudDriver.One.json'
             $Content = Get-Content (Join-Path $FixturesDirectory $Fixture) -Raw
 
             $Response = New-MockObject -Type  Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject
@@ -145,7 +145,7 @@ Describe "Get-Driver" -tag 'unit' {
 
         BeforeEach {
             # act
-            $Actual = Get-Driver -AccessToken $AccessToken -Id $Id
+            $Actual = Get-FuelCloudDriver -AccessToken $AccessToken -Id $Id
         }
 
         it "makes the correct request" {
@@ -182,7 +182,7 @@ Describe "Get-Driver" -tag 'unit' {
         $EndingDate = '05/02/2020'
 
         Mock Invoke-WebRequest {
-            $Fixture = 'Get-Driver.Multiple.1.json'
+            $Fixture = 'Get-FuelCloudDriver.Multiple.1.json'
             $Content = Get-Content (Join-Path $FixturesDirectory $Fixture) -Raw
 
             $Response = New-MockObject -Type  Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject
@@ -192,7 +192,7 @@ Describe "Get-Driver" -tag 'unit' {
 
         BeforeEach {
             # act
-            $Actual = Get-Driver -AccessToken $AccessToken -StartingDate $StartingDate -EndingDate $EndingDate
+            $Actual = Get-FuelCloudDriver -AccessToken $AccessToken -StartingDate $StartingDate -EndingDate $EndingDate
         }
 
         it "makes the correct request" {
@@ -234,7 +234,7 @@ Describe "Get-Driver" -tag 'unit' {
             }
 
             # act/assert
-            { Get-Driver -AccessToken $AccessToken } | Should -Throw 'Response status code does not indicate success: 401 (Unauthorized).'
+            { Get-FuelCloudDriver -AccessToken $AccessToken } | Should -Throw 'Response status code does not indicate success: 401 (Unauthorized).'
         }
 
     } # /Context
