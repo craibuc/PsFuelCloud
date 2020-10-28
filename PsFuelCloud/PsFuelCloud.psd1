@@ -30,7 +30,7 @@ CompanyName = 'Cogniza, Inc.'
 Copyright = '(c) Cogniza, Inc. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'PowerShell module that wraps the Geotab API.'
+Description = 'PowerShell module that wraps the FuelCloud API.'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = ''
