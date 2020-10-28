@@ -52,6 +52,7 @@ function Set-FuelCloudDriver {
         [int]$pin,
 
         [Parameter(ValueFromPipelineByPropertyName)]
+        [ValidateRange(0,1)]
         [int]$status
     )
 
@@ -64,12 +65,12 @@ function Set-FuelCloudDriver {
         Write-Debug "Uri: $Uri"
 
         $Body = @{}
-        if ($FullName) { $Body['full_name']=$FullName }
+        if ($full_name) { $Body['full_name']=$full_name }
         if ($pin) { $Body['pin']=$pin.ToString().PadLeft(5,'0') }
-        if ($Phone) { $Body['phone']=$Phone }
-        if ($Code) { $Body['code']=$Code }
-        if ($Status) { $Body['status']=$Status }
-    
+        if ($phone) { $Body['phone']=$phone }
+        if ($code) { $Body['code']=$code }
+        $Body['status']=$status
+
         # PATCH
         $Content = ( Invoke-WebRequest -Uri $uri -Method Patch -Body $Body -ContentType "application/json" -Headers $Headers ).Content | ConvertFrom-Json
     
