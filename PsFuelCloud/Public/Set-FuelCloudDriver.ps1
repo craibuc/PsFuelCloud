@@ -64,15 +64,19 @@ function Set-FuelCloudDriver {
         $Uri = "https://api.fuelcloud.com/rest/v1.0/driver/$id"
         Write-Debug "Uri: $Uri"
 
-        $Body = @{}
-        if ($full_name) { $Body['full_name']=$full_name }
-        if ($pin) { $Body['pin']=$pin.ToString().PadLeft(5,'0') }
-        if ($phone) { $Body['phone']=$phone }
-        if ($code) { $Body['code']=$code }
-        $Body['status']=$status
+        # make a copy of Dictionary
+        $Body = @{} + $PSBoundParameters
+
+        # remove parameters that won't be posted
+        $Body.Remove('AccessToken')
+
+        # correct values
+        if ( $Body['pin'] ) { $Body['pin'] = $Body['pin'].ToString().PadLeft(5,'0') }
+
+        Write-Debug $Body
 
         # PATCH
-        $Content = ( Invoke-WebRequest -Uri $uri -Method Patch -Body $Body -ContentType "application/json" -Headers $Headers ).Content | ConvertFrom-Json
+        $Content = ( Invoke-WebRequest -Uri $uri -Method Patch -Body ($Body | ConvertTo-Json) -ContentType "application/json" -Headers $Headers ).Content | ConvertFrom-Json
     
         # returns PsCustomObject representation of object
         if ( $Content.data ) { $Content.data }
