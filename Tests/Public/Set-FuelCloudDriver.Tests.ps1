@@ -3,20 +3,23 @@ https://powershell.org/forums/topic/pester-invoke-webrequest/
 https://groups.google.com/forum/#!topic/pester/ZgNpVc36Z0k
 #>
 
-# /PsFuelCloud
-$ProjectDirectory = Split-Path -Path (Split-Path -Path $PSScriptRoot -Parent) -Parent
+BeforeAll {
 
-# /PsFuelCloud/PsFuelCloud/Public
-$PublicPath = Join-Path $ProjectDirectory "/PsFuelCloud/Public/"
+    # /PsFuelCloud
+    $ProjectDirectory = Split-Path -Path (Split-Path -Path $PSScriptRoot -Parent) -Parent
 
-# /PsFuelCloud/Tests/Fixtures/
-# $FixturesDirectory = Join-Path $ProjectDirectory "/Tests/Fixtures/"
+    # /PsFuelCloud/PsFuelCloud/Public
+    $PublicPath = Join-Path $ProjectDirectory "/PsFuelCloud/Public/"
 
-# Set-FuelCloudDriver.ps1
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
+    # /PsFuelCloud/Tests/Fixtures/
+    $FixturesDirectory = Join-Path $ProjectDirectory "/Tests/Fixtures/"
 
-# . /PsFuelCloud/PsFuelCloud/Public/Set-FuelCloudDriver.ps1
-. (Join-Path $PublicPath $sut)
+    # Set-FuelCloudDriver.ps1
+    $SUT = (Split-Path -Leaf $PSCommandPath) -replace '\.Tests\.', '.'
+
+    . (Join-Path $PublicPath $SUT)
+
+}
 
 Describe "Set-FuelCloudDriver" -tag 'unit' {
 
@@ -132,7 +135,7 @@ Describe "Set-FuelCloudDriver" -tag 'unit' {
             $Driver = @{
                 id = 123456
                 full_name = 'First Last'
-                pin = 99999
+                pin = 100 # test for 0 padding
                 code = 'FL1234'
                 phone = '1234567890'
                 status = 0
@@ -180,35 +183,40 @@ Describe "Set-FuelCloudDriver" -tag 'unit' {
             It "sets the full_name property correctly" {
                 # assert 
                 Assert-MockCalled Invoke-WebRequest -ParameterFilter {
-                    $Body.full_name -eq $Driver.full_name
+                    $BodyHash = $Body | ConvertFrom-Json
+                    $BodyHash.full_name -eq $Driver.full_name
                 }
             }
 
             It "sets the pin property correctly" {
                 # assert 
                 Assert-MockCalled Invoke-WebRequest -ParameterFilter {
-                    $Body.pin -eq $Driver.pin
+                    $BodyHash = $Body | ConvertFrom-Json
+                    $BodyHash.pin -eq $Driver.pin.ToString().PadLeft(5,'0')
                 }
             }
 
             It "sets the phone property correctly" {
                 # assert 
                 Assert-MockCalled Invoke-WebRequest -ParameterFilter {
-                    $Body.phone -eq $Driver.phone
+                    $BodyHash = $Body | ConvertFrom-Json
+                    $BodyHash.phone -eq $Driver.phone
                 }
             }
 
             It "sets the code property correctly" {
                 # assert 
                 Assert-MockCalled Invoke-WebRequest -ParameterFilter {
-                    $Body.code -eq $Driver.code
+                    $BodyHash = $Body | ConvertFrom-Json
+                    $BodyHash.code -eq $Driver.code
                 }
             }
 
             It "sets the status property correctly" {
                 # assert 
                 Assert-MockCalled Invoke-WebRequest -ParameterFilter {
-                    $Driver.status ? $Body.status -eq $Driver.status : $Body.status -eq 0
+                    $BodyHash = $Body | ConvertFrom-Json
+                    $Driver.status ? $BodyHash.status -eq $Driver.status : $BodyHash.status -eq 0
                 }
             }
     
