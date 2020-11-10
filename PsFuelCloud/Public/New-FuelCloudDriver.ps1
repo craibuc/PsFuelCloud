@@ -44,7 +44,8 @@ function New-FuelCloudDriver {
     )
 
     begin {
-        $Uri = "https://api.fuelcloud.com/rest/v1.0/driver/"
+        # an ending '/' will create a '301 Moved Permanently' error
+        $Uri = "https://api.fuelcloud.com/rest/v1.0/driver"
         Write-Debug "Uri: $Uri"
     
         $Headers = @{Authorization = $AccessToken}
@@ -59,8 +60,10 @@ function New-FuelCloudDriver {
         if ($phone) { $Body['phone']=$phone }
         if ($code) { $Body['code']=$code }
     
+        Write-Debug ($Body | ConvertTo-Json)
+
         # POST
-        $Content = ( Invoke-WebRequest -Uri $uri -Method Post -Body $Body -ContentType "application/json" -Headers $Headers ).Content | ConvertFrom-Json
+        $Content = ( Invoke-WebRequest -Uri $uri -Method Post -Body ($Body | ConvertTo-Json) -ContentType "application/json" -Headers $Headers ).Content | ConvertFrom-Json
     
         # returns PsCustomObject representation of object
         if ( $Content.data ) { $Content.data }
