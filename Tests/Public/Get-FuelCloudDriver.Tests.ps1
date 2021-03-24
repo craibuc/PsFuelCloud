@@ -1,24 +1,20 @@
-# /PsFuelCloud
-$ProjectDirectory = Split-Path -Path (Split-Path -Path $PSScriptRoot -Parent) -Parent
+BeforeAll {
 
-# /PsFuelCloud/PsFuelCloud/Public
-$PublicPath = Join-Path $ProjectDirectory "/PsFuelCloud/Public/"
+    # diretories
+    $ProjectDirectory = Split-Path -Path (Split-Path -Path $PSScriptRoot -Parent) -Parent
+    $PublicPath = Join-Path $ProjectDirectory "/PsFuelCloud/Public/"
+    $FixturesDirectory = Join-Path $ProjectDirectory "/Tests/Fixtures/"
 
-# /PsFuelCloud/Tests/Fixtures/
-$FixturesDirectory = Join-Path $ProjectDirectory "/Tests/Fixtures/"
+    # dot sourcing
+    $sut = (Split-Path -Leaf $PsCommandPath) -replace '\.Tests\.', '.'
+    . (Join-Path $PublicPath $sut)
 
-# Get-Driver.ps1
-$sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
-
-# . /PsFuelCloud/PsFuelCloud/Public/Get-Driver.ps1
-. (Join-Path $PublicPath $sut)
+}
 
 Describe "Get-FuelCloudDriver" -tag 'unit' {
 
     Context "Parameter validation" {
-        BeforeAll {
-            $Command = Get-Command 'Get-FuelCloudDriver'
-        }
+        BeforeAll { $Command = Get-Command 'Get-FuelCloudDriver' }
 
         Context 'AccessToken' {
             BeforeAll {
@@ -37,6 +33,51 @@ Describe "Get-FuelCloudDriver" -tag 'unit' {
             BeforeAll {
                 $ParameterName = 'Id'
                 $ParameterSetName = 'ById'
+            }
+
+            It "is an [int]" {
+                $Command | Should -HaveParameter $ParameterName -Type int
+            }
+            It "is mandatory member of '$ParameterSetName' parameter set" {
+                $Command.parameters[$ParameterName].parametersets[$ParameterSetName].IsMandatory | Should -Be $true
+            }
+
+        }
+
+        Context 'Code' {
+            BeforeAll {
+                $ParameterName = 'Code'
+                $ParameterSetName = 'ByCode'
+            }
+
+            It "is an [string]" {
+                $Command | Should -HaveParameter $ParameterName -Type string
+            }
+            It "is mandatory member of '$ParameterSetName' parameter set" {
+                $Command.parameters[$ParameterName].parametersets[$ParameterSetName].IsMandatory | Should -Be $true
+            }
+
+        }
+
+        Context 'Phone' {
+            BeforeAll {
+                $ParameterName = 'Phone'
+                $ParameterSetName = 'ByPhone'
+            }
+
+            It "is an [string]" {
+                $Command | Should -HaveParameter $ParameterName -Type string
+            }
+            It "is mandatory member of '$ParameterSetName' parameter set" {
+                $Command.parameters[$ParameterName].parametersets[$ParameterSetName].IsMandatory | Should -Be $true
+            }
+
+        }
+
+        Context 'Status' {
+            BeforeAll {
+                $ParameterName = 'Status'
+                $ParameterSetName = 'ByStatus'
             }
 
             It "is an [int]" {
@@ -231,6 +272,190 @@ Describe "Get-FuelCloudDriver" -tag 'unit' {
 
 
     } # /context (id)
+
+    Context 'ByCode' {
+
+        BeforeAll {
+
+            # arrange
+            $AccessToken = 'BEARER 01234567897abcdefghijklmnopqurtuvwxyz'
+            $Code = 'ABCDEF'
+
+            Mock Invoke-WebRequest {
+                $Fixture = 'Get-FuelCloudDriver.Response.One.json'
+                $Content = Get-Content (Join-Path $FixturesDirectory $Fixture) -Raw
+
+                $Response = New-MockObject -Type  Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject
+                $Response | Add-Member -Type NoteProperty -Name 'Content' -Value $Content -Force
+                $Response
+            }
+
+        }
+
+        BeforeEach {
+            # act
+            $Actual = Get-FuelCloudDriver -AccessToken $AccessToken -Code $Code
+        }
+
+        Context "Request" {
+
+            It "sets the Authorization header to the AccessToken" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Headers.Authorization -eq $AccessToken
+                }
+            }
+
+            It "sets the Content-Type header to 'application/x-www-form-urlencoded'" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $ContentType -eq 'application/x-www-form-urlencoded'
+                }
+            }
+
+            It "sets the Method to Get" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Method -eq 'Get'
+                }
+            }
+
+            It "sets the Uri correctly" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Uri -eq "https://api.fuelcloud.com/rest/v1.0/driver?filter[code]=$Code"
+                }
+            }
+
+        } # / context request
+
+        Context "Response" {
+
+            It "returns the specified driver" {
+                # assert
+                $Actual.Code | Should -Be $Code
+            }
+    
+        }
+
+
+    } # /context (code)
+
+    Context 'ByPhone' {
+
+        BeforeAll {
+
+            # arrange
+            $AccessToken = 'BEARER 01234567897abcdefghijklmnopqurtuvwxyz'
+            $Phone = '8019310852'
+
+            Mock Invoke-WebRequest {
+                $Fixture = 'Get-FuelCloudDriver.Response.One.json'
+                $Content = Get-Content (Join-Path $FixturesDirectory $Fixture) -Raw
+
+                $Response = New-MockObject -Type  Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject
+                $Response | Add-Member -Type NoteProperty -Name 'Content' -Value $Content -Force
+                $Response
+            }
+
+        }
+
+        BeforeEach {
+            # act
+            $Actual = Get-FuelCloudDriver -AccessToken $AccessToken -Phone $Phone
+        }
+
+        Context "Request" {
+
+            It "sets the Authorization header to the AccessToken" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Headers.Authorization -eq $AccessToken
+                }
+            }
+
+            It "sets the Content-Type header to 'application/x-www-form-urlencoded'" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $ContentType -eq 'application/x-www-form-urlencoded'
+                }
+            }
+
+            It "sets the Method to Get" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Method -eq 'Get'
+                }
+            }
+
+            It "sets the Uri correctly" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Uri -eq "https://api.fuelcloud.com/rest/v1.0/driver?filter[phone]=$Phone"
+                }
+            }
+
+        } # / context request
+
+    } # /context (phone)
+
+    Context 'ByStatus' {
+
+        BeforeAll {
+
+            # arrange
+            $AccessToken = 'BEARER 01234567897abcdefghijklmnopqurtuvwxyz'
+            $Status = 1
+
+            Mock Invoke-WebRequest {
+                $Fixture = 'Get-FuelCloudDriver.Response.One.json'
+                $Content = Get-Content (Join-Path $FixturesDirectory $Fixture) -Raw
+
+                $Response = New-MockObject -Type  Microsoft.PowerShell.Commands.BasicHtmlWebResponseObject
+                $Response | Add-Member -Type NoteProperty -Name 'Content' -Value $Content -Force
+                $Response
+            }
+
+        }
+
+        BeforeEach {
+            # act
+            $Actual = Get-FuelCloudDriver -AccessToken $AccessToken -Status $Status
+        }
+
+        Context "Request" {
+
+            It "sets the Authorization header to the AccessToken" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Headers.Authorization -eq $AccessToken
+                }
+            }
+
+            It "sets the Content-Type header to 'application/x-www-form-urlencoded'" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $ContentType -eq 'application/x-www-form-urlencoded'
+                }
+            }
+
+            It "sets the Method to Get" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Method -eq 'Get'
+                }
+            }
+
+            It "sets the Uri correctly" {
+                # assert 
+                Assert-MockCalled Invoke-WebRequest -ParameterFilter {
+                    $Uri -eq "https://api.fuelcloud.com/rest/v1.0/driver?filter[status]=$Status"
+                }
+            }
+
+        } # / context request
+
+    } # /context (status)
 
     Context "ByDate" {
 

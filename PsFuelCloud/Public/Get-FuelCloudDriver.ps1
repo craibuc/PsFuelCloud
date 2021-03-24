@@ -2,7 +2,16 @@
 .SYNOPSIS
 
 .PARAMETER Id
-Driver record identified by Id
+Find Driver record identified by Id
+
+.PARAMETER Code
+Find Driver record identified by Code
+
+.PARAMETER Phone
+Find Driver record identified by telephone #
+
+.PARAMETER Status
+Find Driver record(s) identified by Status
 
 .PARAMETER StartingDate
 Driver records created or modified after StartingDate
@@ -36,29 +45,52 @@ function Get-FuelCloudDriver {
     (
         [Parameter(ParameterSetName='None',Mandatory)]
         [Parameter(ParameterSetName='ById',Mandatory)]
+        [Parameter(ParameterSetName='ByCode',Mandatory)]
+        [Parameter(ParameterSetName='ByPhone',Mandatory)]
+        [Parameter(ParameterSetName='ByStatus',Mandatory)]
         [Parameter(ParameterSetName='ByDate')]
         [string]$AccessToken,
 
         [Parameter(ParameterSetName='ById',Mandatory)]
         [int]$Id,
 
+        [Parameter(ParameterSetName='ByCode',Mandatory)]
+        [string]$Code,
+
+        [Parameter(ParameterSetName='ByPhone',Mandatory)]
+        [string]$Phone,
+
+        [Parameter(ParameterSetName='ByStatus',Mandatory)]
+        [ValidateSet(0,1)]
+        [int]$Status,
+
         [Parameter(ParameterSetName='ByDate',Mandatory)]
         [datetime]$StartingDate,
 
         [Parameter(ParameterSetName='ByDate',Mandatory)]
         [datetime]$EndingDate
-
     )
 
 	Write-Debug "$($MyInvocation.MyCommand.Name)"
 	Write-Debug "AccessToken: $AccessToken"
     Write-Debug "Id: $Id"
+    Write-Debug "Code: $Code"
+    Write-Debug "Phone: $Phone"
+    Write-Debug "Status: $Status"
     
     Write-Debug "StartingDate: $StartingDate"
     Write-Debug "EndingDate: $EndingDate"
 
+    $Filter = @()
+    if ($Code) { $Filter += "filter[code]=$Code"}
+    if ($Phone) { $Filter += "filter[phone]=$Phone"}
+    if ($Status) { $Filter += "filter[status]=$Status"}
+
     $Uri = "https://api.fuelcloud.com/rest/v1.0/driver"
+
     if ($Id) { $Uri = "$Uri/$Id" }
+    elseif ($Filter.Length -gt 0) { $Uri = "{0}?{1}" -f $Uri, ($Filter -Join '&') }
+    
 	Write-Debug "Uri: $Uri"
 
     $Headers = @{Authorization = $AccessToken}
