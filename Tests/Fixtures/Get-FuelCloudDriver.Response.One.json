@@ -6,7 +6,7 @@
             "full_name": "Last, First",
             "pin": "99999",
             "phone": null,
-            "code": null,
+            "code": 'ABCDEF',
             "status": 1,
             "schedule": {
                 "mon": {
