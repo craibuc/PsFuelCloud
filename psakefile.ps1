@@ -12,7 +12,5 @@ Task Symlink -description "Create a symlink for '$ModuleName' module" {
 }
   
 Task Publish -description "Publish module '$ModuleName' to repository '$RepositoryName'" {
-
-    Publish-Module -name $ModuleName -Repository $RepositoryName
-
+  Publish-Module -name $ModuleName -Repository $RepositoryName
 }
